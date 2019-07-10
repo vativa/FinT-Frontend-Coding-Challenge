@@ -4,7 +4,8 @@
 
 The WorldClockApp is a vanilla JavaScript Node.js Application transpiled with Babel.js and bundled by Webpack.
 
-The app laverages 3 components:
+The UI appearance consists of 4 components:
+- master layout root componet
 - app bar with image and title
 - autocomplete input with submit button
 - rendering clock component with label on the left
