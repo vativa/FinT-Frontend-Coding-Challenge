@@ -10,15 +10,20 @@ const MasterLayout = ({ cities }) => {
     master.setAttribute('id', 'master-layout');
     master.appendChild(AppBar({ title: 'World Clocks App' }));
     master.appendChild(InputForm({ cities, addCity }));
+    
+    const clockContainer = document.createElement('div');
+    clockContainer.setAttribute('id', 'clock-container');
+    master.appendChild(clockContainer);
+    
     cities.forEach(city => master.appendChild(ClockView(city)));
     function addCity(city) {
-        if (cities.length === 5) {
+        if (cities.length >= 5) {
             cities.pop();
-            const [input, firstClock] = master.childNodes;
-            master.removeChild(firstClock);
+            const [clock1] = clockContainer.childNodes;
+            clockContainer.removeChild(clock1);
         }
         cities.push(city);
-        master.appendChild(ClockView(city));
+        clockContainer.appendChild(ClockView(city));
     }
     return master;
 };
