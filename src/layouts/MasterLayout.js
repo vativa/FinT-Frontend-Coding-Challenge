@@ -12,7 +12,7 @@ const MasterLayout = ({ cities }) => {
     master.appendChild(InputForm({ cities, addCity }));
     
     const clockContainer = document.createElement('div');
-    clockContainer.setAttribute('id', 'clock-container');
+    clockContainer.setAttribute('id', 'content');
     master.appendChild(clockContainer);
     
     cities.forEach(city => master.appendChild(ClockView(city)));

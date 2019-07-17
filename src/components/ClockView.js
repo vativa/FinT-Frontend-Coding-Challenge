@@ -1,7 +1,7 @@
 /**
- * Component responsible to visualize a world clock
+ * Component responsible to visualize a world view
  */
-import axios from 'axios';
+import axios from 'actions/axios';
 import moment from 'moment';
 import trans from 'lib/trans';
 
@@ -10,26 +10,26 @@ const ClockView = zone => {
     getWorldTime(zone);
     setInterval(() => getWorldTime(zone), 10000);
     
-    const wrapper = document.createElement('div');
-    wrapper.setAttribute('id', 'clock-wrapper');
+    const clock = document.createElement('div');
+    clock.setAttribute('id', 'clock');
     
     const label = document.createElement('div');
     label.setAttribute('id', 'clock-label');
     const [area, city] = zone.split('/');
     label.innerHTML = `${trans(city).ucfirst()} (${area})`;
-    wrapper.appendChild(label);
+    clock.appendChild(label);
     
-    const clock = document.createElement('div');
-    clock.setAttribute('id', 'clock-view');
-    wrapper.appendChild(clock);
+    const view = document.createElement('div');
+    view.setAttribute('id', 'clock-view');
+    clock.appendChild(view);
     
     function getWorldTime(zone) {
         axios(`http://worldtimeapi.org/api/timezone/${zone}`).then(({ data: { datetime } }) => {
-            clock.innerHTML = moment(datetime).parseZone().format('LTS');
+            view.innerHTML = moment(datetime).parseZone().format('LTS');
         }).catch(console.error);
     }
     
-    return wrapper;
+    return clock;
 };
 
 export default ClockView;
